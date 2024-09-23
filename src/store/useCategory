@@ -1,0 +1,32 @@
+import { create } from "zustand"
+const useCategory = create((set) => ({
+    datas: [
+        {
+            id: 1,
+            task: "funny",
+            isDone: false
+        },
+        {
+            id: 2,
+            task: "hahaha",
+            isDone: false
+        },
+        {
+            id: 3,
+            task: "heheheh",
+            isDone: false
+        }
+    ],
+    addHandler: (newItem) => set((state) => ({
+        datas: [...state.datas, newItem]
+    })),
+    removeHandler: (itemId) => set((state) => ({
+        datas: state.datas.filter((el) => el.id !== itemId)
+    })),
+    doneHandler: (itemId) => set((state) => ({
+        datas: state.datas.map((el) => el.id === itemId ? { ...el, isDone: !el.isDone } : { ...el })
+    }))
+
+
+}))
+export default useCategory;
